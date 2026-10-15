@@ -21,9 +21,10 @@ export default function ScrollToHash() {
     if (location.hash) {
       const target = document.getElementById(decodeURIComponent(location.hash.slice(1)));
       if (target) {
-        // Deep links jump instantly; in-app navigation follows the CSS
-        // scroll-behavior (smooth, or instant under reduced motion).
-        target.scrollIntoView({ behavior: isInitial ? 'instant' : 'auto' });
+        // Deep links and cross-page jumps are instant. Only a jump within the
+        // same page follows the CSS scroll-behavior (smooth, or instant under
+        // reduced motion).
+        target.scrollIntoView({ behavior: isInitial || pathChanged ? 'instant' : 'auto' });
         if (!isInitial) {
           target.setAttribute('tabindex', '-1');
           target.focus({ preventScroll: true });
@@ -44,7 +45,8 @@ export default function ScrollToHash() {
     }
 
     if (!isInitial && pathChanged) {
-      window.scrollTo(0, 0);
+      // Instant: a new page should not glide up from wherever the last one was.
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
       document.getElementById('main')?.focus({ preventScroll: true });
     }
     return undefined;
