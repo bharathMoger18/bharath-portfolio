@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 import Footer from './Footer.tsx';
 import type { FooterProps } from './Footer.tsx';
@@ -21,7 +22,15 @@ export default function SiteLayout({ header, footer }: SiteLayoutProps) {
       </a>
       <Header {...header} />
       <main id="main" tabIndex={-1} className="site-main">
-        <Outlet />
+        <Suspense
+          fallback={
+            <div className="container site-main__loading" role="status">
+              <span className="visually-hidden">Loading page</span>
+            </div>
+          }
+        >
+          <Outlet />
+        </Suspense>
       </main>
       <Footer {...footer} />
     </>

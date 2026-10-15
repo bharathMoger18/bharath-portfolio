@@ -1,0 +1,49 @@
+.tokens-lab {
+  display: grid;
+  gap: var(--space-7);
+}
+
+.tokens-lab__swatches {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr));
+  gap: var(--space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tokens-lab__swatch {
+  display: block;
+  height: 4rem;
+  margin-bottom: var(--space-2);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+}
+
+.tokens-lab__type p {
+  margin-bottom: var(--space-3);
+  overflow-wrap: anywhere;
+}
+
+.tokens-lab__type .label {
+  display: block;
+  font-size: var(--text-xs);
+}
+
+.tokens-lab__space {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin-bottom: var(--space-2);
+}
+
+.tokens-lab__space .label {
+  min-width: 6rem;
+}
+
+.tokens-lab__bar {
+  display: block;
+  height: 1rem;
+  background: var(--color-green);
+  border-radius: var(--radius-sm);
+}

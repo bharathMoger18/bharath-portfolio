@@ -6,3 +6,7 @@
 .site-main:focus {
   outline: none;
 }
+
+.site-main__loading {
+  min-height: 40vh;
+}
