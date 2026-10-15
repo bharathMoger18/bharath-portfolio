@@ -1,0 +1,113 @@
+/*
+ * Design tokens. Owner: Account A (Lead Engineer).
+ * Palette from PLAYBOOK section 3. One accent only (muted green).
+ * Components must use these variables and no raw hex values.
+ *
+ * Breakpoints cannot be custom properties in media queries. Use these:
+ *   sm 640px, md 768px, lg 1024px, xl 1440px (mobile first, min-width).
+ */
+
+:root {
+  color-scheme: light;
+
+  /* ---- Color: palette ---- */
+  --color-ivory: #f5f1e9;
+  --color-charcoal: #222522;
+  --color-sage: #d8e3d5;
+  --color-sand: #e6ddd0;
+  --color-green: #47644f;
+  --color-white-soft: #fffdf9;
+
+  /* ---- Color: roles ---- */
+  --color-bg: var(--color-ivory);
+  --color-surface: var(--color-white-soft);
+  --color-surface-alt: var(--color-sand);
+  --color-tint: var(--color-sage);
+  --color-text: var(--color-charcoal);
+  --color-text-muted: #565b56;
+  --color-accent: var(--color-green);
+  --color-on-dark: var(--color-ivory);
+  --color-dark: var(--color-charcoal);
+  --color-border: rgb(34 37 34 / 0.16);
+  --color-border-strong: rgb(34 37 34 / 0.4);
+  --color-ghost: var(--color-charcoal);
+  --ghost-opacity: 0.06;
+
+  /* ---- Fonts (self-hosted via Fontsource; fallbacks are real stacks) ---- */
+  --font-display: 'Manrope Variable', 'Manrope', 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-accent: 'Instrument Serif', 'Fraunces', Georgia, 'Times New Roman', serif;
+  --font-body: 'Inter Variable', 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 800;
+
+  /* ---- Type scale (fluid, 360px to 1440px) ---- */
+  --text-xs: 0.875rem;                                  /* 14px floor: diagram labels */
+  --text-sm: 0.9375rem;
+  --text-base: 1rem;
+  --text-lg: clamp(1.125rem, 1.05rem + 0.4vw, 1.3125rem);
+  --text-xl: clamp(1.375rem, 1.2rem + 0.9vw, 1.875rem);
+  --text-2xl: clamp(1.75rem, 1.4rem + 1.8vw, 2.75rem);
+  --text-3xl: clamp(2.25rem, 1.6rem + 3.2vw, 4rem);
+  --text-4xl: clamp(2.75rem, 1.7rem + 5.2vw, 6rem);     /* section headings */
+  --text-hero: clamp(3rem, 1.5rem + 7.5vw, 8.5rem);     /* hero headline */
+  --text-ghost: clamp(6rem, 2rem + 22vw, 22rem);        /* ghost name */
+
+  --leading-tight: 0.98;
+  --leading-snug: 1.2;
+  --leading-body: 1.6;
+  --tracking-tight: -0.035em;
+  --tracking-label: 0.12em;                             /* uppercase mono labels */
+
+  /* ---- Spacing scale (4px base) ---- */
+  --space-0: 0;
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+  --space-9: 6rem;
+  --space-10: 8rem;
+  --section-pad-y: clamp(var(--space-8), 10vw, var(--space-10));
+
+  /* ---- Layout ---- */
+  --container-max: 80rem;
+  --container-narrow: 46rem;
+  --gutter: clamp(1rem, 4vw, 3rem);
+  --target-min: 44px;                                   /* minimum touch target */
+  --header-h: 4.5rem;
+
+  /* ---- Radius ---- */
+  --radius-sm: 0.5rem;
+  --radius-md: 1rem;
+  --radius-lg: 1.75rem;
+  --radius-pill: 999px;
+
+  /* ---- Shadow (soft, warm, no glow) ---- */
+  --shadow-sm: 0 1px 2px rgb(34 37 34 / 0.08);
+  --shadow-md: 0 8px 24px rgb(34 37 34 / 0.1);
+  --shadow-lg: 0 20px 48px rgb(34 37 34 / 0.14);
+
+  /* ---- Focus ring (visible on every control) ---- */
+  --focus-color: var(--color-green);
+  --focus-width: 3px;
+  --focus-offset: 3px;
+  --focus-ring: var(--focus-width) solid var(--focus-color);
+
+  /* ---- Motion (global.css zeroes these under prefers-reduced-motion) ---- */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-fast: 150ms;
+  --duration-base: 300ms;
+  --duration-slow: 600ms;
+
+  /* ---- Layers ---- */
+  --z-header: 50;
+  --z-menu: 60;
+  --z-overlay: 70;
+}
