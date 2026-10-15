@@ -1,0 +1,163 @@
+.hero {
+  position: relative;
+  overflow: clip; /* the ghost name may be wider than the screen: never scroll sideways */
+  padding-block: var(--space-8) var(--space-9);
+}
+
+/* ---- Ghost name ---- */
+.ghost-name {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  font-family: var(--font-display);
+  font-weight: var(--weight-bold);
+  font-size: min(var(--text-ghost), 20vw);
+  line-height: 0.78;
+  letter-spacing: var(--tracking-tight);
+  text-align: center;
+  white-space: nowrap;
+  color: var(--color-ghost);
+  opacity: var(--ghost-opacity);
+  pointer-events: none;
+  user-select: none;
+}
+
+/* ---- Layout ---- */
+.hero__inner {
+  position: relative;
+  display: grid;
+  gap: var(--space-8);
+}
+
+.hero__copy {
+  display: grid;
+  justify-items: start;
+  gap: var(--space-5);
+}
+
+.hero__headline {
+  font-size: var(--text-hero);
+  line-height: var(--leading-tight);
+  max-width: 12ch;
+  padding-bottom: var(--space-3); /* clears the descenders of the last line */
+}
+
+.hero__sentence {
+  max-width: 34ch;
+  font-size: var(--text-lg);
+  color: var(--color-text-muted);
+}
+
+/* ---- Buttons (shared pill look) ---- */
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding-inline: var(--space-6);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-display);
+  font-weight: var(--weight-semibold);
+  text-decoration: none;
+  transition:
+    background var(--duration-fast) var(--ease-out),
+    color var(--duration-fast) var(--ease-out);
+}
+
+.pill--dark {
+  background: var(--color-dark);
+  color: var(--color-on-dark);
+}
+
+.pill--dark:hover {
+  background: var(--color-green);
+}
+
+.pill--outline {
+  border: 1.5px solid var(--color-border-strong);
+}
+
+.pill--outline:hover {
+  background: var(--color-surface);
+}
+
+/* ---- Social links ---- */
+.hero__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-5);
+  margin: 0;
+  padding: 0;
+}
+
+.hero__links a {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: var(--target-min);
+  font-weight: var(--weight-medium);
+}
+
+/* ---- Request path (portrait fallback) ---- */
+.request-path {
+  margin: 0;
+  padding: var(--space-5);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+.request-path__label {
+  margin-bottom: var(--space-4);
+}
+
+.request-path__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.request-path__hop {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  font-size: var(--text-sm);
+}
+
+.request-path__num {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+}
+
+.request-path__name {
+  font-weight: var(--weight-medium);
+}
+
+/* ---- Portrait (only when public/portrait.webp exists) ---- */
+.hero__portrait {
+  width: 100%;
+  max-width: 28rem;
+  height: auto;
+  margin-inline: auto;
+}
+
+@media (min-width: 1024px) {
+  .hero__inner {
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    align-items: end;
+  }
+}

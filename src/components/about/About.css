@@ -1,0 +1,29 @@
+.about {
+  display: grid;
+  gap: var(--space-8);
+}
+
+.about__copy {
+  display: grid;
+  align-content: start;
+  gap: var(--space-5);
+  max-width: 36rem;
+  font-size: var(--text-lg);
+}
+
+.about__badge {
+  display: flex;
+  justify-content: center;
+}
+
+@media (min-width: 1024px) {
+  .about {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 24rem);
+    gap: var(--space-9);
+    align-items: start;
+  }
+
+  .about__badge {
+    justify-content: flex-end;
+  }
+}
