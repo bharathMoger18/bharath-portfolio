@@ -1,0 +1,77 @@
+.work-panel {
+  display: grid;
+  gap: var(--space-6);
+  padding: var(--space-6);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-sm);
+}
+
+.work-panel + .work-panel {
+  margin-top: var(--space-6);
+}
+
+.work-panel__side {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3) var(--space-4);
+}
+
+.work-panel__title {
+  font-size: var(--text-3xl);
+  line-height: var(--leading-tight);
+}
+
+.work-panel__summary {
+  max-width: 38rem;
+  margin-top: var(--space-4);
+  color: var(--color-text-muted);
+  font-size: var(--text-lg);
+}
+
+.work-panel__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-4);
+  margin: var(--space-5) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.work-panel__link {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--target-min);
+  margin-top: var(--space-6);
+  padding-inline: var(--space-6);
+  border-radius: var(--radius-pill);
+  background: var(--color-dark);
+  color: var(--color-on-dark);
+  font-weight: var(--weight-semibold);
+  text-decoration: none;
+  transition: background-color var(--duration-fast) var(--ease-out);
+}
+
+.work-panel__link:hover {
+  background: var(--color-green);
+}
+
+.work-panel__media {
+  min-width: 0;
+  overflow-x: auto;
+}
+
+@media (min-width: 64rem) {
+  .work-panel {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+    gap: var(--space-7);
+    padding: var(--space-7);
+  }
+
+  /* Status label spans the top; text left, diagram right. */
+  .work-panel__side {
+    grid-column: 1 / -1;
+  }
+}
