@@ -1,0 +1,107 @@
+.mobile-menu__trigger,
+.mobile-menu__close {
+  display: grid;
+  place-items: center;
+  width: var(--target-min);
+  height: var(--target-min);
+  border: 1px solid var(--color-border-strong);
+  border-radius: 50%;
+}
+
+.mobile-menu__trigger:hover,
+.mobile-menu__close:hover {
+  background: var(--color-surface-alt);
+}
+
+@media (min-width: 64rem) {
+  .mobile-menu__trigger {
+    display: none;
+  }
+}
+
+.mobile-menu {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-menu);
+  display: flex;
+  flex-direction: column;
+  padding-inline: var(--gutter);
+  padding-bottom: var(--space-7);
+  background: var(--color-bg);
+  overflow-y: auto;
+}
+
+.mobile-menu[hidden] {
+  display: none;
+}
+
+.mobile-menu:focus {
+  outline: none;
+}
+
+.mobile-menu__top {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  min-height: var(--header-h);
+}
+
+.mobile-menu__list {
+  margin: var(--space-5) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.mobile-menu__link {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: var(--target-min);
+  padding-block: var(--space-3);
+  border-bottom: 1px solid var(--color-border);
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-tight);
+  text-decoration: none;
+}
+
+.mobile-menu__link[aria-current] {
+  color: var(--color-accent);
+}
+
+.mobile-menu__link[aria-current]::before {
+  content: '';
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.mobile-menu__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-5);
+  margin-top: var(--space-7);
+}
+
+.mobile-menu__resume {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--target-min);
+  padding-inline: var(--space-6);
+  border-radius: var(--radius-pill);
+  background: var(--color-dark);
+  color: var(--color-on-dark);
+  font-weight: var(--weight-semibold);
+  text-decoration: none;
+}
+
+.mobile-menu__github {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: var(--target-min);
+  font-weight: var(--weight-medium);
+}

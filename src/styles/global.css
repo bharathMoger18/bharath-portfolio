@@ -125,6 +125,8 @@ h3 em,
   font-style: italic;
   font-weight: var(--weight-regular);
   letter-spacing: -0.01em;
+  /* The italic glyphs carry extra right-side space; tuck a following "." in. */
+  margin-right: -0.04em;
 }
 
 code,

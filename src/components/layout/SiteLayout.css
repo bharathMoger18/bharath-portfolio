@@ -1,0 +1,8 @@
+.site-main {
+  min-height: 60vh;
+}
+
+/* #main is focused by code on route change; it is not an interactive control. */
+.site-main:focus {
+  outline: none;
+}

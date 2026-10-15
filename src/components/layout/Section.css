@@ -1,0 +1,28 @@
+.section {
+  padding-block: var(--section-pad-y);
+}
+
+.section--tint {
+  background: var(--color-tint);
+}
+
+.section--dark {
+  background: var(--color-dark);
+  color: var(--color-on-dark);
+}
+
+.section--dark .section__label {
+  color: var(--color-sand);
+}
+
+.section__label {
+  margin-bottom: var(--space-4);
+}
+
+.section__heading {
+  max-width: 18ch;
+}
+
+.section__body {
+  margin-top: var(--space-7);
+}

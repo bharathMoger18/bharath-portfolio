@@ -1,0 +1,135 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-header);
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  min-height: var(--header-h);
+}
+
+/* Monogram in a rounded square */
+.header__brand {
+  display: grid;
+  place-items: center;
+  width: var(--target-min);
+  height: var(--target-min);
+  flex: none;
+  border-radius: var(--radius-sm);
+  background: var(--color-dark);
+  color: var(--color-on-dark);
+  font-family: var(--font-display);
+  font-weight: var(--weight-bold);
+  font-size: var(--text-lg);
+  letter-spacing: var(--tracking-tight);
+  text-decoration: none;
+}
+
+.header__brand:hover {
+  background: var(--color-green);
+}
+
+/* Section pills: desktop only; mobile uses the menu */
+.header__nav {
+  display: none;
+}
+
+.header__group {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  margin: 0;
+  padding: var(--space-1);
+  list-style: none;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+}
+
+.header__link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: var(--target-min);
+  padding-inline: var(--space-4);
+  border-radius: var(--radius-pill);
+  font-weight: var(--weight-medium);
+  text-decoration: none;
+  transition: background-color var(--duration-fast) var(--ease-out);
+}
+
+.header__link:hover {
+  background: var(--color-surface-alt);
+}
+
+/* Active section: tinted fill, bolder weight and a dot (not color alone) */
+.header__link[aria-current] {
+  background: var(--color-tint);
+  font-weight: var(--weight-semibold);
+}
+
+.header__link[aria-current]::before {
+  content: '';
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.header__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+/* Resume: dark pill */
+.header__resume {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--target-min);
+  padding-inline: var(--space-5);
+  border-radius: var(--radius-pill);
+  background: var(--color-dark);
+  color: var(--color-on-dark);
+  font-weight: var(--weight-semibold);
+  text-decoration: none;
+  transition: background-color var(--duration-fast) var(--ease-out);
+}
+
+.header__resume:hover {
+  background: var(--color-green);
+}
+
+.header__resume[aria-current='page'] {
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+}
+
+.header__github {
+  display: none;
+  place-items: center;
+  width: var(--target-min);
+  height: var(--target-min);
+  border: 1px solid var(--color-border-strong);
+  border-radius: 50%;
+}
+
+.header__github:hover {
+  background: var(--color-surface-alt);
+}
+
+@media (min-width: 64rem) {
+  .header__nav {
+    display: block;
+  }
+
+  .header__github {
+    display: grid;
+  }
+}
