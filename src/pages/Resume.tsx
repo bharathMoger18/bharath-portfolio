@@ -1,10 +1,15 @@
+import Seo from '../components/layout/Seo.tsx';
 import { OWNER, RESUME_PDF } from '../siteConfig.ts';
 import './pages.css';
 
 export default function Resume() {
   return (
     <section className="container page">
-      <title>{`Resume | ${OWNER}`}</title>
+      <Seo
+        title={`Resume | ${OWNER}`}
+        description="Resume of Bharath Moger. Read it online or download the PDF."
+        path="/resume"
+      />
       <p className="label">Resume</p>
       <h1>
         My <em>resume</em>.

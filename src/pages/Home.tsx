@@ -1,4 +1,6 @@
 import Section from '../components/layout/Section.tsx';
+import Seo from '../components/layout/Seo.tsx';
+import { SITE_TITLE } from '../siteConfig.ts';
 
 /*
  * Home composes the sections in playbook order. Until the real components land,
@@ -8,6 +10,7 @@ import Section from '../components/layout/Section.tsx';
 export default function Home() {
   return (
     <>
+      <Seo title={SITE_TITLE} path="/" />
       {/* TODO(B): replace with <Hero />. Hero owns the page's single h1. */}
       <section className="container page">
         <p className="label">Foundation</p>

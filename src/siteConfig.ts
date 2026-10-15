@@ -6,6 +6,8 @@
 import type { SiteLayoutProps } from './components/layout/SiteLayout.tsx';
 import type { NavItem } from './components/layout/types.ts';
 
+export { SITE_DESCRIPTION, SITE_TITLE, SITE_URL } from './site.constants.ts';
+
 export const OWNER = 'Bharath Moger';
 export const GITHUB_URL = 'https://github.com/bharathMoger18';
 /** Real filename as committed in public/. */

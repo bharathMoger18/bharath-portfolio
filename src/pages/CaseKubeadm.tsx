@@ -1,3 +1,4 @@
+import Seo from '../components/layout/Seo.tsx';
 import { OWNER } from '../siteConfig.ts';
 import './pages.css';
 
@@ -5,7 +6,11 @@ import './pages.css';
 export default function CaseKubeadm() {
   return (
     <article className="container page">
-      <title>{`Self-Built Kubernetes Platform | ${OWNER}`}</title>
+      <Seo
+        title={`Self-Built Kubernetes Platform | ${OWNER}`}
+        description="Case study: a self-built Kubernetes platform. Architecture, pipeline, key decisions and evidence."
+        path="/work/kubeadm"
+      />
       <p className="label">Case study</p>
       <h1>
         Self-built <em>Kubernetes</em> platform.

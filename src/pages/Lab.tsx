@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import type { LabEntry } from '../components/layout/lab.ts';
+import Seo from '../components/layout/Seo.tsx';
 import { OWNER } from '../siteConfig.ts';
 import './pages.css';
 
@@ -44,8 +45,7 @@ export default function Lab() {
 
   return (
     <section className="container page">
-      <title>{`Lab | ${OWNER}`}</title>
-      <meta name="robots" content="noindex" />
+      <Seo title={`Lab | ${OWNER}`} path="/lab" noindex />
       <p className="label">Lab</p>
       <h1>
         Component <em>lab</em>.
