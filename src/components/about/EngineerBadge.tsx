@@ -79,7 +79,14 @@ export default function EngineerBadge({
             <QrCode value={site.url} label={`QR code linking to ${host}`} size={88} />
             <p className="badge__qr-text">
               <span className="label">Live site</span>
-              <span>{host}</span>
+              <span>
+                {host.split('.').map((part, i, all) => (
+                  <span key={i}>
+                    {part}
+                    {i < all.length - 1 ? <>.<wbr /></> : null}
+                  </span>
+                ))}
+              </span>
             </p>
           </div>
         </div>

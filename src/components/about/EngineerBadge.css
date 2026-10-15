@@ -1,6 +1,7 @@
 .badge {
-  margin: 0;
-  width: 100%;
+  /* Leave room for the sway: a rotated card is wider than its box (about 8px a side at 1.8deg). */
+  margin: 0 auto;
+  width: calc(100% - var(--space-4));
   max-width: 21rem;
 }
 
@@ -126,5 +127,5 @@
   display: grid;
   gap: var(--space-1);
   font-size: var(--text-sm);
-  overflow-wrap: anywhere;
+  overflow-wrap: normal; /* the host breaks only at its dots (<wbr>) */
 }

@@ -8,11 +8,11 @@
 .ghost-name {
   position: absolute;
   inset-inline: 0;
-  bottom: -0.12em;
+  bottom: 0;
   font-family: var(--font-display);
   font-weight: var(--weight-bold);
   font-size: min(var(--text-ghost), 20vw);
-  line-height: 0.8;
+  line-height: 0.78;
   letter-spacing: var(--tracking-tight);
   text-align: center;
   white-space: nowrap;
@@ -39,6 +39,7 @@
   font-size: var(--text-hero);
   line-height: var(--leading-tight);
   max-width: 12ch;
+  padding-bottom: var(--space-3); /* clears the descenders of the last line */
 }
 
 .hero__sentence {
