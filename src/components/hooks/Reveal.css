@@ -1,0 +1,20 @@
+/* Visible by default. Only elements the hook armed (below the fold, motion allowed) start hidden. */
+.reveal[data-reveal='out'] {
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+.reveal[data-reveal='in'] {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity var(--duration-slow) var(--ease-out),
+    transform var(--duration-slow) var(--ease-out);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal[data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+}
