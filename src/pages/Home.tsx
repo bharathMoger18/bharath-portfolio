@@ -1,4 +1,14 @@
+import About from '../components/about/About.tsx';
+import { MOCK_ABOUT } from '../components/about/about.mock.ts';
+import Contact from '../components/contact/Contact.tsx';
+import { MOCK_CONTACT } from '../components/contact/contact.mock.ts';
+import Hero from '../components/hero/Hero.tsx';
+import { MOCK_HERO } from '../components/hero/hero.mock.ts';
 import Section from '../components/layout/Section.tsx';
+import NumbersStrip from '../components/numbers/NumbersStrip.tsx';
+import { MOCK_NUMBERS } from '../components/numbers/numbers.mock.ts';
+import StackTable from '../components/stack/StackTable.tsx';
+import { MOCK_STACK } from '../components/stack/stack.mock.ts';
 import Seo from '../components/layout/Seo.tsx';
 import { SITE_TITLE } from '../siteConfig.ts';
 
@@ -11,20 +21,11 @@ export default function Home() {
   return (
     <>
       <Seo title={SITE_TITLE} path="/" />
-      {/* TODO(B): replace with <Hero />. Hero owns the page's single h1. */}
-      <section className="container page">
-        <p className="label">Foundation</p>
-        <h1>
-          Placeholder <em>home</em>.
-        </h1>
-      </section>
+      {/* TODO(D): swap the mock props for src/data/site.ts (SiteMeta) and final copy. */}
+      <Hero {...MOCK_HERO} />
 
-      <Section id="about" index={1} label="About" heading={<>Hi, I&apos;m <em>Bharath</em>.</>}>
-        <p>TODO(B): About and EngineerBadge. TODO(D): copy.</p>
-      </Section>
-      <Section id="stack" index={2} label="Stack" tone="tint" heading={<>The tools I <em>use</em>.</>}>
-        <p>TODO(B): StackTable. TODO(D): src/data/stack.ts.</p>
-      </Section>
+      <About {...MOCK_ABOUT} />
+      <StackTable items={MOCK_STACK} />
       <Section id="work" index={3} label="Work" heading={<>Things I&apos;ve <em>built</em>.</>}>
         <p>TODO(A, step 6): WorkPanel for each project.</p>
       </Section>
@@ -34,15 +35,11 @@ export default function Home() {
       <Section id="principles" index={5} label="Principles" heading={<>How I <em>work</em>.</>}>
         <p>TODO(D): principles copy.</p>
       </Section>
-      <Section id="numbers" index={6} label="Numbers" tone="tint" heading={<>The system in <em>numbers</em>.</>}>
-        <p>TODO(B): NumbersStrip. TODO(D): src/data/numbers.ts.</p>
-      </Section>
+      <NumbersStrip facts={MOCK_NUMBERS} />
       <Section id="education" index={7} label="Education" heading={<>Education &amp; <em>experience</em>.</>}>
         <p>TODO(D): src/data/education.ts.</p>
       </Section>
-      <Section id="contact" index={8} label="Contact" tone="dark" heading={<>Let&apos;s <em>talk</em>.</>}>
-        <p>TODO(B): Contact.</p>
-      </Section>
+      <Contact {...MOCK_CONTACT} />
     </>
   );
 }
