@@ -1,6 +1,6 @@
 # FACTS.md: verified claims for the Bharath portfolio
 
-Task D1. Owner: Account D (Verifier). Status: **DRAFT v2, awaiting Bharath approval (gate G2).** v2 adds: DECISIONS.md (now on the remote), the resume PDF, Bharath's answers of 2026-10-15, and his `kubectl get nodes` output.
+Task D1. Owner: Account D (Verifier). Status: **DRAFT v4, awaiting Bharath approval (gate G2).** v4 (D2): DECISIONS #19 applied to RS-04; P-rows restored in section 7b; new rows K-30..K-33, A-34, M-06, M-07, P-08, S-09. v2 adds: DECISIONS.md (now on the remote), the resume PDF, Bharath's answers of 2026-10-15, and his `kubectl get nodes` output.
 
 - Audited repo: `https://github.com/bharathMoger18/k8s-campuscart`
 - Audited commit: `774df4037e5e7984d7b95b4adebf143cfb216bcd` (`774df40`)
@@ -59,6 +59,10 @@ Source tags on CONFIRMED rows: `(repo)` = proven by the audited files (default w
 | K-27 | nginx runs non-root in the cluster (via securityContext, not via the image) | CONFIRMED | `k8s/nginx.yaml:42-43` (`runAsNonRoot`, `runAsUser: 101`). Site wording: "runs non-root in the cluster". Never "non-root image". |
 | K-28 | Web, Redis, Postgres, backup run with `runAsNonRoot: true` | CONFIRMED | `k8s/web.yaml:121`; `k8s/redis.yaml:48`; `k8s/postgres.yaml:53,115`; `k8s/postgres-backup-cronjob.yaml:62` |
 | K-29 | A third pipeline `Jenkinsfile.security` exists: Dependency audit + Image scan with Trivy (HIGH/CRITICAL, fails the build) | CONFIRMED | `Jenkinsfile.security:15,46,72-73` (not in PLAYBOOK; new). Its trigger/schedule was not audited. |
+| K-30 | The Jenkins deployer Role allows: Deployments and Services get/list/patch/update; Pods get/list/watch; Jobs get/list/watch/create/delete; Pod logs get; PodDisruptionBudgets get/create/patch/update; ReplicaSets and Events get/list. There is **no rule for Secrets**. | CONFIRMED | `k8s/jenkins-deployer-rbac.yaml:15-54`. The file's own comment ("ONLY update Deployments ... nothing else") overstates this; site copy follows the rules, not the comment. Do not write "least privilege". |
+| K-31 | Two Kaniko containers (one per image) so one build cannot starve the other of memory; the debug Kaniko image is used because the distroless one has no shell | CONFIRMED | `Jenkinsfile:244-266` (design comment and containers) |
+| K-32 | Checkout tags each image with the short hash of the last commit that touched its inputs and asks the registry whether the tag exists | CONFIRMED | `Jenkinsfile:35-48` |
+| K-33 | Security Scan runs before Build on purpose: a failed scan leaves no image in the registry, so a retry cannot skip both | CONFIRMED | `Jenkinsfile:183-190` (stage and comment) |
 
 ## 2. Vault
 
@@ -81,6 +85,8 @@ Source tags on CONFIRMED rows: `(repo)` = proven by the audited files (default w
 | M-03 | Grafana is configured in the repo (`monitoring/values.yaml` "Prometheus/Grafana values") | CONTRADICTED | The file is 20 lines with one top-level key, `prometheus:`. The word "grafana" appears nowhere in the repo. No dashboards, no alert rules, no `PrometheusRule`. Do not show Grafana as a repo-backed component. **Update 2026-10-15:** Bharath says he has Grafana screenshots and dashboard JSON, but none has been supplied. This row stays CONTRADICTED for the repo. A separate row can become CONFIRMED (owner evidence) once the files are committed (suggest `public/evidence/`). Wording must be "dashboards from my cluster", never "monitoring is running now", unless he confirms the current state. |
 | M-04 | The Django app exposes Prometheus metrics, including custom counters/gauges | CONFIRMED | `campuscart/settings.py:33,48,58`; `campuscart/urls.py:44`; `chat/metrics.py:1`, `orders/metrics.py:1`, `payments/metrics.py:1`, `users/metrics.py:1` |
 | M-05 | Alerting is configured | CONTRADICTED | No Alertmanager config, no `PrometheusRule` anywhere in `k8s/`, `k8s-aws/`, `monitoring/`. List under "what I would improve next". |
+| M-06 | Grafana dashboard "Kubernetes / Compute Resources / Namespace (Pods)", namespace `k8s-campuscart`, with pods nginx, postgres-0, redis and two web pods | CONFIRMED (owner evidence) | Screenshot committed as `public/evidence/grafana-namespace-pods.png` (2904x996, created 2026-10-15 11:01 IST; its 05:05 to 05:30 UTC time axis matches). No IPs or secrets visible. DECISIONS #14 caption only. |
+| M-07 | Grafana "Node Exporter / Nodes" dashboard (upload `grafana-node-exporter.png`) | UNVERIFIED (not published) | Not the "microservices dashboard" the D2 brief names. Its `Instance` field shows a private IP, which DECISIONS #18 forbids, and no DECISIONS #14 caption covers it. Withheld. Needs a redacted copy plus a Manager-approved caption, or the real microservices screenshot. |
 
 ## 4. AWS environment (`terraform/`, `k8s-aws/`, `Jenkinsfile.aws`)
 
@@ -119,6 +125,7 @@ Source tags on CONFIRMED rows: `(repo)` = proven by the audited files (default w
 | A-31 | AWS nginx container port matches the image | CONTRADICTED | `k8s-aws/nginx-deployment.yaml:35,49,56` use port **80** and run as UID 101. `nginx/nginx.conf:13-14` listens on **8080/8443**. `Jenkinsfile.aws:237` builds that same `nginx/Dockerfile`. A non-root process cannot bind 80. Bharath has not checked this at runtime (A-33). It is a file-level inconsistency, stated as such. It may be listed under "What I would improve next": "align the AWS nginx containerPort and probes with the image's 8080". |
 | A-32 | AWS environment is running now | CONTRADICTED (owner) | Bharath: it is destroyed (2026-10-15). DECISIONS #2. **Site wording:** "Completed deployment, infrastructure torn down." Never "live". No live demo link for AWS. The repo agrees with the intent (`modules/networking/variables.tf` "test-and-destroy workflow"). |
 | A-33 | The AWS stack served real traffic end to end (an HTTP response came back from the ALB) | UNVERIFIED | Bharath (2026-10-15): "I did not checked it, let's say yes." That is an assumption, not an observation, so it is not recorded as CONFIRMED. The AWS stack is destroyed, so it cannot be tested now. **Site wording:** "Completed deployment, infrastructure torn down" (DECISIONS #2). Never say it served traffic, never show a URL or a response. Evidence that could settle it: a Jenkins stage view or build log showing `Deploy to EKS` green, including `rollout status` for nginx (`Jenkinsfile.aws:358`), which would only pass if the readiness probe passed (see A-31). |
+| A-34 | The AWS deployment has a step that creates the database schema | UNVERIFIED | `campuscart-backend/entrypoint.sh:41-46`: migrations run only when `MIGRATE_ONLY=true`, which only the kubeadm migrate Job sets (`k8s/migrate-job.yaml`). `k8s-aws/` has no migrate Job and `Jenkinsfile.aws` has no migrate step. Not on the site. Open question for Bharath: how was the AWS schema created? |
 
 ## 5. Secrets and sensitive data audit (values never copied)
 
@@ -132,6 +139,7 @@ Source tags on CONFIRMED rows: `(repo)` = proven by the audited files (default w
 | S-06 | **FLAG:** the Cloudflare Tunnel UUID is committed | CONFIRMED (risk) | `k8s/cloudflare-tunnel/cloudflared-config.yaml:8`. An identifier, not a credential (`credentials.json` is mounted from a Secret). Do not publish. |
 | S-07 | Grep hits for `secret/password` in k8s manifests are annotation keys naming a Secret, not values | CONFIRMED | `k8s/ingress.yaml:9`; `k8s/migrate-job.yaml:29`; `k8s/postgres-backup-cronjob.yaml:33`; `k8s/web.yaml:52` |
 | S-08 | Test files contain literal fixture passwords | CONFIRMED (low) | `campuscart-backend/*/tests.py` (e.g. `cart/tests.py:32`). The repo's own scan comment calls these Low findings (`Jenkinsfile:219-220`). Not shipped on the site. |
+| S-09 | Evidence permalinks at `774df40` display whole files, including the identifiers flagged in S-04 to S-06 | CONFIRMED (risk) | The audited repo is public. The site's data files never copy those values, but a visitor who opens `k8s/web.yaml`, `cloudflared-config.yaml` or the Terraform files will see them. Fixing it needs a new commit in `k8s-campuscart`; pinned permalinks would still show the old content. Manager decision. |
 
 ## 6. README and repo hygiene (feeds task D4)
 
@@ -151,7 +159,7 @@ Source tags on CONFIRMED rows: `(repo)` = proven by the audited files (default w
 | RS-01 | Name, email, GitHub, LinkedIn, site link | CONFIRMED (resume) | Resume header. Do not copy the phone number into any `src/data` file or page. The PLAYBOOK contact section is email, GitHub, LinkedIn, resume only. The PDF is public in `public/` with the phone number inside; that is Bharath's choice, so I flag it. |
 | RS-02 | MCA 2025, CGPA 9.05 | CONFIRMED (resume) | See P-06 |
 | RS-03 | Summary: hands-on with Docker, Kubernetes, Jenkins, Prometheus/Grafana, Terraform on AWS | CONFIRMED for Docker, Kubernetes, Jenkins, Prometheus, Terraform. **UNVERIFIED for Grafana** | M-01..M-04; Grafana per M-03. Pending the screenshots Bharath says he has. |
-| RS-04 | "Designed, deployed, and monitored a fullstack web application" | CONFIRMED (owner) | Deployment, containerisation and infra are proven by the repo. Authorship of the Django app is Bharath's statement (2026-10-15): asked "did you write the Django app yourself, or build the platform around it?", he answered "yes". I read that as: he wrote it himself. The repo cannot prove authorship, so About copy may say "I wrote the app and built the platform around it", labelled owner-stated. Bharath: reply with one sentence if I read it wrong. |
+| RS-04 | "Designed, deployed, and monitored a fullstack web application" | CONFIRMED for deployment, containerisation and infra. **Authorship: DO NOT CLAIM** | DECISIONS #19 (2026-10-15): the Django app was built with AI tools. Never write "I wrote the app". Required wording: "I built CampusCart with AI coding tools. My own work is the platform around it: Kubernetes, CI/CD, secrets, TLS, monitoring and AWS infrastructure in Terraform." This **supersedes** the v3 owner answer ("yes"), which answered an either/or question. The site does not repeat the resume's "Designed ... a fullstack web application". |
 | RS-05 | Skills: Docker, Docker Compose, kubeadm, kubectl, AWS EKS | CONFIRMED | `docker-compose.yml:4-70`; `modules/eks/main.tf:5,77`; kubeadm roles and version per K-24 (owner output). No kubeadm config file is in the repo. |
 | RS-06 | Skills: Jenkins, Kaniko, Terraform, Git, GitHub | CONFIRMED | `Jenkinsfile*`, `terraform/`. There is no `.github/` and no GitHub Actions in this repo: do not mark a GitHub Actions tile as "used in" these projects. |
 | RS-07 | Skills: AWS EC2 | UNVERIFIED for these projects; CONFIRMED (owner) as earlier practice | No `aws_instance` anywhere in Terraform. EC2 appears only as the EKS managed node group (`modules/eks/main.tf:77-94`). Bharath (2026-10-15): he used EC2 in earlier basic AWS learning projects, before moving to EKS with managed node groups. **Site wording:** an EC2 tile marked "learning / earlier projects", with no link to either case study and no "used in AWS" flag. ECR, RDS, ElastiCache, S3, VPC, IAM, EKS are CONFIRMED (A-06..A-20). |
@@ -179,6 +187,16 @@ Source tags on CONFIRMED rows: `(repo)` = proven by the audited files (default w
 | RS-27 | Kaniko builds pushed to ECR; manifests templated from live Terraform outputs | CONFIRMED | A-05; `Jenkinsfile.aws:274-301` (`terraform output`, `envsubst`) |
 | RS-28 | MCA (VTU, Mysuru, 2025, 9.05) and BCA (Shree Guru Sudhindra BCA College, Bhatkal, 2023, 8.1) | CONFIRMED (resume) | P-05, P-06; DECISIONS #7 |
 | RS-29 | Resume says the AWS project has a Jenkins pipeline and the AWS stack ran | CONFIRMED (code) / CONFIRMED (owner) | A-01; A-32 (owner: deployed, now destroyed). |
+
+## 7b. Profile rows (restored in v4; referenced by RS-02, RS-28 and the data files)
+
+| ID | Claim | Status | Evidence / note |
+|---|---|---|---|
+| P-02 | "TLS termination" on the AWS ALB | CONTRADICTED | A-27, A-29. The resume line RS-25 must be fixed. |
+| P-05 | BCA, Shree Guru Sudhindra BCA College, Bhatkal, 2023, CGPA 8.1 | CONFIRMED (resume) | Resume Education section; DECISIONS #7. Not independently verifiable. |
+| P-06 | MCA, Visvesvaraya Technological University (Mysuru), 2025, CGPA 9.05 | CONFIRMED (resume) | Resume summary and Education section. |
+| P-07 | Full resume line-by-line audit | CONFIRMED (done) | Section 7 (RS-01 to RS-29). |
+| P-08 | Bharath is a fresher based in Bengaluru | CONFIRMED (owner) | Stated in the D2 content brief. It is **not** on the resume. |
 
 ---
 
@@ -227,7 +245,7 @@ Answered since v2: Q-11 authorship (yes, wrote the app: RS-04), Q-13 EC2 (earlie
 |---|---|---|
 | Q-5 | QA must reach `campuscart.bharathops.online` from an allowed network and record the HTTP status. | "Live" label (K-23, RS-12) |
 | Q-7 | Do you have the Jenkins stage view or log of the AWS pipeline run? Was `Deploy to EKS` green? | A-31, A-33 |
-| Q-8 | Please commit the Grafana screenshots / dashboard JSON (suggest `public/evidence/`, secrets and IPs hidden). | Grafana tile (M-03, RS-03, RS-18) |
+| Q-8 | PARTLY ANSWERED: the namespace dashboard screenshot is in `public/evidence/` (M-06). Still needed: the real CampusCart microservices dashboard screenshot, or a redacted node-exporter image plus a Manager-approved caption (M-07). | Second monitoring evidence |
 | Q-12 | Manager: relax DECISIONS #3 now that Bharath says IRSA worked end to end? | IRSA wording (A-22) |
 | Q-14 | Did you run a restore test of the nightly backup? If yes, paste the output (hide names and IPs). | Backup wording (K-16, RS-19) |
 
