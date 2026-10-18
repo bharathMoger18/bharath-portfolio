@@ -109,15 +109,24 @@
 }
 
 /* ---- Portrait (only when public/portrait.webp exists) ---- */
+/* With a photo, the half-body cutout sits flush on the hero's bottom edge, in front of the ghost name. */
+.hero--portrait {
+  padding-bottom: 0;
+}
+
 .hero__visual {
-  align-self: end; /* the photo stands on the bottom edge, in front of the ghost name */
+  align-self: end;
+  position: relative; /* paints above the ghost name */
 }
 
 .hero__portrait {
   width: 100%;
-  max-width: 32rem;
+  max-width: 30rem;
   height: auto;
   margin-inline: auto;
+  /* The half-body photo is cropped at its sides: feather them so no hard vertical edge shows. */
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 7%, #000 93%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 7%, #000 93%, transparent);
 }
 
 @media (min-width: 1024px) {
