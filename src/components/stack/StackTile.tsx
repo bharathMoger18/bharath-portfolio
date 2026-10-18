@@ -17,7 +17,6 @@ export default function StackTile({ item, selected, dimmed, onSelect }: StackTil
       data-dimmed={dimmed ? 'true' : undefined}
       aria-pressed={selected}
       aria-controls="stack-detail"
-      aria-label={`${item.name}, ${CATEGORY_LABEL[item.category]}. ${usedInText(item.usedIn)}.`}
       onClick={() => onSelect(item.id)}
       onFocus={() => onSelect(item.id)}
     >
@@ -29,8 +28,12 @@ export default function StackTile({ item, selected, dimmed, onSelect }: StackTil
       <span className="stack-tile__symbol" aria-hidden="true">
         {item.symbol}
       </span>
-      <span className="stack-tile__name" aria-hidden="true">
+      <span className="stack-tile__name">
         {item.name}
+        {/* The accessible name is the visible name plus this context, so it contains what is on screen. */}
+        <span className="visually-hidden">
+          , {CATEGORY_LABEL[item.category]}. {usedInText(item.usedIn)}.
+        </span>
       </span>
     </button>
   );
