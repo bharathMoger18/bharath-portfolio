@@ -1,3 +1,4 @@
+/* Mobile and tablet: copy, then the badge below it. */
 .about {
   display: grid;
   gap: var(--space-8);
@@ -7,7 +8,7 @@
   display: grid;
   align-content: start;
   gap: var(--space-5);
-  max-width: 36rem;
+  max-width: 40rem;
   font-size: var(--text-lg);
 }
 
@@ -16,14 +17,49 @@
   justify-content: center;
 }
 
+/*
+ * Desktop: the label, the heading, the copy and the badge share ONE grid, so the
+ * badge column starts on the label's top line and spans label + heading + copy.
+ * Section (layout, not ours) renders label and h2 as direct children of its
+ * .container, so we turn the body wrappers into display: contents and place
+ * every piece on that grid. Nothing is positioned by pixel offsets.
+ */
 @media (min-width: 1024px) {
-  .about {
+  #about > .container {
+    display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(0, 24rem);
-    gap: var(--space-9);
+    grid-template-rows: auto auto 1fr;
+    column-gap: var(--space-8);
     align-items: start;
   }
 
+  #about .section__label {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  #about .section__heading {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  #about .section__body,
+  #about .about {
+    display: contents;
+  }
+
+  .about__copy {
+    grid-column: 1;
+    grid-row: 3;
+    max-width: 44rem;
+    margin-top: var(--space-6);
+    font-size: calc(var(--text-lg) * 1.2);
+  }
+
   .about__badge {
-    justify-content: flex-end;
+    grid-column: 2;
+    grid-row: 1 / -1;
+    align-self: start;
+    justify-content: center;
   }
 }
