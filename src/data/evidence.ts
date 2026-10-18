@@ -39,14 +39,13 @@ export function evTree(label: string, path: string): EvidenceLink {
 /**
  * Screenshot committed in this site's own repo under public/evidence/
  * (docs/DECISIONS.md #14). It has no commit in the audited repo, so `commit`
- * holds the word "screenshot". The url is a site-relative path.
+ * is left out. The url is a site-relative path.
  */
 export function shot(label: string, file: string): EvidenceLink {
   return {
     label,
     path: `public/evidence/${file}`,
     url: `/evidence/${file}`,
-    commit: 'screenshot',
   };
 }
 

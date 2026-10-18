@@ -1,7 +1,8 @@
 import type { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import type { CaseDiagram, EvidenceLink, Project } from '../../data/types.ts';
-import DiagramPlaceholder from './DiagramPlaceholder.tsx';
+import EvidenceFigure from './EvidenceFigure.tsx';
+import type { EvidenceFigureProps } from './EvidenceFigure.tsx';
 import StatusBadge from './StatusBadge.tsx';
 import './CaseStudyLayout.css';
 
@@ -11,8 +12,25 @@ export interface CaseStudyLayoutProps {
   heading?: ReactNode;
   /** 1 on a case-study page; 2 when embedded under another h1 (e.g. /lab). */
   headingLevel?: 1 | 2;
-  /** Maps a diagram to Account C's component. Defaults to a text-only placeholder. */
-  renderDiagram?: (diagram: CaseDiagram) => ReactNode;
+  /** Maps a diagram to its component (components/diagrams/renderDiagram). */
+  renderDiagram: (diagram: CaseDiagram) => ReactNode;
+  /**
+   * Optional screenshot shown at the end of "Security and operations". A list line
+   * that repeats the figure's caption is not printed twice.
+   */
+  figure?: EvidenceFigureProps;
+}
+
+/** Same text, one word set in the italic serif (the site's heading style). */
+function withItalicLastWord(title: string): ReactNode {
+  const cut = title.lastIndexOf(' ');
+  if (cut < 0) return <em>{title}</em>;
+  return (
+    <>
+      {title.slice(0, cut + 1)}
+      <em>{title.slice(cut + 1)}</em>
+    </>
+  );
 }
 
 function EvidenceLinks({ items }: { items: EvidenceLink[] }) {
@@ -26,7 +44,8 @@ function EvidenceLinks({ items }: { items: EvidenceLink[] }) {
           </a>
           <code className="case__evidence-ref">
             {item.path}
-            {item.lines ? `:${item.lines}` : ''} @ {item.commit}
+            {item.lines ? `:${item.lines}` : ''}
+            {item.commit ? ` @ ${item.commit}` : ''}
           </code>
         </li>
       ))}
@@ -45,12 +64,16 @@ export default function CaseStudyLayout({
   heading,
   headingLevel = 1,
   renderDiagram,
+  figure,
 }: CaseStudyLayoutProps) {
   const Title = headingLevel === 1 ? 'h1' : 'h2';
   const Sub = headingLevel === 1 ? 'h2' : 'h3';
   const Item = headingLevel === 1 ? 'h3' : 'h4';
   const id = (part: string) => `${project.slug}-${part}`;
-  const diagram = (d: CaseDiagram) => (renderDiagram ? renderDiagram(d) : <DiagramPlaceholder diagram={d} />);
+  const diagram = (d: CaseDiagram) => renderDiagram(d);
+  const securityLines = figure
+    ? project.securityAndOps.filter((line) => line.replace(/\.$/, '') !== figure.caption)
+    : project.securityAndOps;
 
   const parts: { key: string; num: number; label: string; show: boolean }[] = [
     { key: 'overview', num: 2, label: 'Overview', show: project.overview.length > 0 },
@@ -72,7 +95,7 @@ export default function CaseStudyLayout({
         </Link>
         <p className="label">Case study</p>
         <Title id={id('title')} className="case__title">
-          {heading ?? project.title}
+          {heading ?? withItalicLastWord(project.title)}
         </Title>
         <p className="case__summary">{project.summary}</p>
 
@@ -164,10 +187,11 @@ export default function CaseStudyLayout({
             Security and <em>operations</em>
           </Sub>
           <ul className="case__list case__text">
-            {project.securityAndOps.map((line) => (
+            {securityLines.map((line) => (
               <li key={line}>{line}</li>
             ))}
           </ul>
+          {figure ? <EvidenceFigure {...figure} /> : null}
         </section>
       ) : null}
 
