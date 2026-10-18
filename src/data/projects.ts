@@ -244,7 +244,7 @@ export const AWS_PROJECT: Project = {
   tags: ['Terraform', 'EKS', 'RDS', 'ElastiCache', 'ECR', 'Jenkins'],
 
   overview: [
-    'This is the same CampusCart app, which I built with AI coding tools, deployed to AWS. The goal was to build the infrastructure as Terraform code, in seven modules, and deploy with a nine-stage Jenkins pipeline. I completed the deployment and then tore the infrastructure down.',
+    'This is the same CampusCart app, which I built with AI coding tools, deployed to AWS. The goal was to build the infrastructure as Terraform code, in seven modules, and deploy with a nine-stage Jenkins pipeline, as deployed. I completed the deployment and then tore the infrastructure down.',
     'The app runs on EKS (Kubernetes 1.31) on managed Spot nodes. It uses RDS PostgreSQL and ElastiCache Redis instead of the database and cache I ran inside the kubeadm cluster.',
   ],
   architecture: DIAGRAMS['aws-architecture'],
@@ -257,11 +257,12 @@ export const AWS_PROJECT: Project = {
     'The backend Deployment starts with two replicas. A HorizontalPodAutoscaler is set from 2 to 6 replicas, at 70 percent CPU and 80 percent memory.',
     'The backend and Nginx pods set runAsNonRoot. The app ServiceAccount does not mount a service account token.',
     'The load balancer has an HTTP listener on port 80 only. It routes /api and /ws to the backend and / to Nginx.',
-    'Deploy to EKS waits on rollout status: backend up to 180 seconds, Nginx up to 120 seconds. This pipeline has no rollback.',
+    'Deploy to EKS waits on rollout status: backend up to 180 seconds, Nginx up to 120 seconds. The pipeline as deployed has no rollback.',
+    'After teardown I added Test and Security Scan stages to Jenkinsfile.aws. They have never run, because the environment no longer exists.',
   ],
   nextImprovements: [
     'Add an ACM certificate and an HTTPS listener to the load balancer. The certificate and redirect lines in the ingress file are commented out.',
-    'Add a test stage, a security scan stage and a rollback step to the AWS pipeline.',
+    'Run the Test and Security Scan stages I added to Jenkinsfile.aws after teardown, and add a rollback step.',
     'Make RDS Multi-AZ. It runs in a single availability zone today.',
     'Harden the Nginx container and fix its ports. The AWS manifest uses port 80, but the Nginx config in the image listens on 8080 and 8443.',
     'Add alerting rules and notifications.',

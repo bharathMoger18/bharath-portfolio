@@ -47,7 +47,7 @@ export const STACK: StackItem[] = [
   // ---- CI/CD and IaC
   {
     id: 'jenkins', symbol: 'Jk', name: 'Jenkins', category: 'cicd-iac', usedIn: ['kubeadm', 'aws'],
-    note: 'I built a five-stage pipeline for the kubeadm cluster and a nine-stage pipeline for AWS.',
+    note: 'I built a five-stage pipeline for the kubeadm cluster and a nine-stage pipeline for AWS, as deployed.',
     evidence: [
       ev('kubeadm pipeline stages', 'Jenkinsfile', '15-316'),
       ev('AWS pipeline stages', 'Jenkinsfile.aws', '11-310'),

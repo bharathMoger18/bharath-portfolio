@@ -4,7 +4,7 @@
  * No uptime, traffic, cost, user or test counts (DECISIONS #13).
  *   kubeadm-nodes      FACTS K-24 (owner output, no repo link)
  *   kubeadm-stages     FACTS K-01
- *   aws-stages         FACTS A-01, A-03, A-04
+ *   aws-stages         FACTS A-01, A-03, A-04 (as deployed), A-35 (later edit)
  *   terraform-modules  FACTS A-06
  */
 import type { NumberFact } from './types.ts';
@@ -33,7 +33,7 @@ export const NUMBERS: NumberFact[] = [
     value: 9,
     label: 'AWS pipeline stages',
     caption:
-      'Source: the nine stage names in Jenkinsfile.aws. It has no test, scan or rollback stage.',
+      'Source: the nine stage names in Jenkinsfile.aws as deployed (commit 774df40). It had no test, scan or rollback stage. I added Test and Security Scan stages after teardown; they have never run.',
     evidence: [ev('Jenkinsfile.aws: the nine stage blocks', 'Jenkinsfile.aws', '11-310')],
   },
   {
