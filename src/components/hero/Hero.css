@@ -22,6 +22,10 @@
   user-select: none;
 }
 
+.ghost-name::before {
+  content: attr(data-text);
+}
+
 /* ---- Layout ---- */
 .hero__inner {
   position: relative;
