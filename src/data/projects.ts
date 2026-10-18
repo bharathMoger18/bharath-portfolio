@@ -118,7 +118,7 @@ export const KUBEADM_PROJECT: Project = {
   status: QA_CONFIRMED_LIVE
     ? { kind: 'live', label: 'Live' }
     : { kind: 'pending-confirmation', label: 'Deployed on my own kubeadm cluster' },
-  ...(QA_CONFIRMED_LIVE ? { liveUrl: KUBEADM_LIVE_URL } : {}),
+  liveUrl: KUBEADM_LIVE_URL,
   tags: ['kubeadm', 'Jenkins', 'Vault', 'cert-manager', 'Cloudflare Tunnel', 'Prometheus'],
 
   overview: [

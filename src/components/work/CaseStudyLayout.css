@@ -32,22 +32,6 @@
   margin-top: var(--space-6);
 }
 
-.case__live {
-  display: inline-flex;
-  align-items: center;
-  min-height: var(--target-min);
-  padding-inline: var(--space-5);
-  border-radius: var(--radius-pill);
-  background: var(--color-dark);
-  color: var(--color-on-dark);
-  font-weight: var(--weight-semibold);
-  text-decoration: none;
-}
-
-.case__live:hover {
-  background: var(--color-green);
-}
-
 .case__tags,
 .case__toc ul {
   display: flex;

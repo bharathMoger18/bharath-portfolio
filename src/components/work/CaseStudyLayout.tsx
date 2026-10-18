@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import type { CaseDiagram, EvidenceLink, Project } from '../../data/types.ts';
 import EvidenceFigure from './EvidenceFigure.tsx';
 import type { EvidenceFigureProps } from './EvidenceFigure.tsx';
+import LiveSiteLink from './LiveSiteLink.tsx';
 import StatusBadge from './StatusBadge.tsx';
 import './CaseStudyLayout.css';
 
@@ -103,12 +104,7 @@ export default function CaseStudyLayout({
         <div className="case__status">
           <p className="label">{num(1)} / Status</p>
           <StatusBadge status={project.status} />
-          {project.status.kind === 'live' && project.liveUrl ? (
-            <a className="case__live" href={project.liveUrl} target="_blank" rel="noopener noreferrer">
-              Visit the running site
-              <span className="visually-hidden"> (opens in a new tab)</span>
-            </a>
-          ) : null}
+          {project.liveUrl ? <LiveSiteLink href={project.liveUrl} /> : null}
         </div>
 
         {project.tags.length > 0 ? (

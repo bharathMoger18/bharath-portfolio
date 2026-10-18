@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import type { Project } from '../../data/types.ts';
+import LiveSiteLink from './LiveSiteLink.tsx';
 import StatusBadge from './StatusBadge.tsx';
 import './WorkPanel.css';
 
@@ -42,10 +43,13 @@ export default function WorkPanel({ project, index, media }: WorkPanelProps) {
           </ul>
         ) : null}
 
-        <Link className="work-panel__link" to={`/work/${project.slug}`}>
-          Read the case study
-          <span className="visually-hidden">: {project.title}</span>
-        </Link>
+        <div className="work-panel__actions">
+          <Link className="work-panel__link" to={`/work/${project.slug}`}>
+            Read the case study
+            <span className="visually-hidden">: {project.title}</span>
+          </Link>
+          {project.liveUrl ? <LiveSiteLink href={project.liveUrl} /> : null}
+        </div>
       </div>
 
       {media ? <div className="work-panel__media">{media}</div> : null}
