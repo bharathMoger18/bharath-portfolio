@@ -1,6 +1,6 @@
 import { defineLab } from '../layout/lab.ts';
 import AwsArchitecture from './AwsArchitecture.tsx';
-import { AWS_ARCHITECTURE_TEXT } from './diagrams.mock.ts';
+import { AWS_ARCHITECTURE_TEXT } from '../../data/diagrams.ts';
 export default defineLab({
   id: 'aws-architecture',
   title: 'AwsArchitecture (C)',

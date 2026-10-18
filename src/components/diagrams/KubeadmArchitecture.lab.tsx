@@ -1,6 +1,6 @@
 import { defineLab } from '../layout/lab.ts';
 import KubeadmArchitecture from './KubeadmArchitecture.tsx';
-import { KUBEADM_ARCHITECTURE_TEXT } from './diagrams.mock.ts';
+import { KUBEADM_ARCHITECTURE_TEXT } from '../../data/diagrams.ts';
 export default defineLab({
   id: 'kubeadm-architecture',
   title: 'KubeadmArchitecture (C)',

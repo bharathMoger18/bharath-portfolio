@@ -1,22 +1,15 @@
+import { PROJECTS } from '../../data/projects.ts';
 import { defineLab } from '../layout/lab.ts';
-import { MOCK_PROJECT, MOCK_STATUSES } from './mock.ts';
 import WorkPanel from './WorkPanel.tsx';
 
 export default defineLab({
   id: 'work-panel',
   title: 'WorkPanel (A)',
-  note: 'Three stacked panels, one per status kind. All text is TODO(D).',
+  note: 'The two real projects from data/projects.ts, stacked, without a diagram (the Work section on Home passes one through media).',
   render: () => (
     <div style={{ padding: 'var(--space-5)' }}>
-      {MOCK_STATUSES.map((status, i) => (
-        <WorkPanel
-          key={status.kind}
-          index={i + 1}
-          project={{ ...MOCK_PROJECT, slug: `todo-d-${status.kind}`, status }}
-          media={
-            i === 0 ? <p className="label">TODO(C): diagram slot (media prop)</p> : undefined
-          }
-        />
+      {PROJECTS.map((project, i) => (
+        <WorkPanel key={project.slug} project={{ ...project, slug: `${project.slug}-panel-lab` }} index={i + 1} />
       ))}
     </div>
   ),

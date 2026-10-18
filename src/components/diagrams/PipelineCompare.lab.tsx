@@ -1,6 +1,6 @@
 import { defineLab } from '../layout/lab.ts';
 import PipelineCompare from './PipelineCompare.tsx';
-import { PIPELINE_COMPARE_TEXT } from './diagrams.mock.ts';
+import { PIPELINE_COMPARE_TEXT } from '../../data/diagrams.ts';
 export default defineLab({
   id: 'pipeline-compare',
   title: 'PipelineCompare (C)',
