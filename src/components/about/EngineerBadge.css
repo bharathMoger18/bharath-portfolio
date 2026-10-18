@@ -1,8 +1,16 @@
 .badge {
-  /* Leave room for the sway: a rotated card is wider than its box (about 8px a side at 1.8deg). */
+  /* Leave room for the sway: the card swings from its top, so its bottom moves sideways (about 20px at 2.2deg). */
+  --sway: 2.2deg;
   margin: 0 auto;
-  width: calc(100% - var(--space-4));
+  width: calc(100% - var(--space-6) * 1.5);
   max-width: 22rem;
+}
+
+@media (min-width: 768px) {
+  .badge {
+    --sway: 3deg;
+    width: calc(100% - var(--space-4));
+  }
 }
 
 /* The whole lanyard + card swings from the top centre. */
@@ -15,17 +23,17 @@
 
 @media (prefers-reduced-motion: no-preference) {
   .badge__swing {
-    animation: badge-sway 7s ease-in-out infinite alternate;
+    animation: badge-sway 4s ease-in-out infinite alternate;
   }
 }
 
 @keyframes badge-sway {
   from {
-    transform: rotate(-1.8deg);
+    transform: rotate(calc(var(--sway) * -1));
   }
 
   to {
-    transform: rotate(1.8deg);
+    transform: rotate(var(--sway));
   }
 }
 
