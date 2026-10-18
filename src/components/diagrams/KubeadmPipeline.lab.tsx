@@ -1,6 +1,6 @@
 import { defineLab } from '../layout/lab.ts';
 import KubeadmPipeline from './KubeadmPipeline.tsx';
-import { KUBEADM_PIPELINE_TEXT } from './diagrams.mock.ts';
+import { KUBEADM_PIPELINE_TEXT } from '../../data/diagrams.ts';
 export default defineLab({
   id: 'kubeadm-pipeline',
   title: 'KubeadmPipeline (C)',

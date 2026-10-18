@@ -1,6 +1,6 @@
 import { defineLab } from '../layout/lab.ts';
 import AwsPipeline from './AwsPipeline.tsx';
-import { AWS_PIPELINE_TEXT } from './diagrams.mock.ts';
+import { AWS_PIPELINE_TEXT } from '../../data/diagrams.ts';
 export default defineLab({
   id: 'aws-pipeline',
   title: 'AwsPipeline (C)',
