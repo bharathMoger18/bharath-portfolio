@@ -35,7 +35,7 @@ export default function Home() {
         ))}
       </Section>
 
-      <Section id="pipeline" index={4} label="Pipeline" tone="tint" heading={<>Two <em>pipelines</em>.</>}>
+      <Section id="pipeline" index={4} label="Pipeline" tone="tint" heading={<>Two <em>pipelines</em>, compared.</>}>
         <PipelineCompare textAlternative={PIPELINE_COMPARE_TEXT} />
       </Section>
 

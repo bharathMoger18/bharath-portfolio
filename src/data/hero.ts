@@ -1,8 +1,6 @@
 /*
  * Hero copy. Owner: Account D (Content).
- * The request path lists the real hops of the kubeadm cluster (FACTS K-22,
- * diagram text): Cloudflare, cloudflared (Tunnel), ingress-nginx, Nginx,
- * Django, PostgreSQL. No "live" claim here (DECISIONS #6).
+ * No "live" claim here (DECISIONS #6).
  */
 import type { HeroCopy, HeroProps } from '../components/hero/Hero.tsx';
 import { SITE } from './site.ts';
@@ -14,8 +12,6 @@ export const HERO_COPY: HeroCopy = {
     'MCA graduate, 2025. I built a 3-node Kubernetes cluster with kubeadm and an AWS EKS deployment with Terraform.',
   primaryLabel: 'Explore projects',
   resumeLabel: 'View resume',
-  requestPath: ['Browser', 'Cloudflare', 'Tunnel', 'Ingress', 'Nginx', 'Django', 'PostgreSQL'],
-  requestPathLabel: 'Request path through the kubeadm cluster',
 };
 
 export const HERO: HeroProps = {

@@ -12,7 +12,7 @@ export const SITE: SiteMeta = {
   location: 'Bengaluru',
   title: 'Bharath Moger | DevOps Portfolio',
   description:
-    'Bharath Moger, a fresher DevOps engineer in Bengaluru. A self-built Kubernetes platform and an AWS EKS deployment, with Terraform, Jenkins and Docker.',
+    'Bharath Moger, a DevOps fresher in Bengaluru. A self-built Kubernetes platform and an AWS EKS deployment, with Terraform, Jenkins and Docker.',
   url: 'https://portfolio.bharathops.online',
   email: 'bharath.m.moger@gmail.com',
   githubUrl: 'https://github.com/bharathMoger18',
