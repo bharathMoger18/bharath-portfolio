@@ -21,3 +21,4 @@ Date: 2026-10-15
 17. Authorship: see item 19.
 18. Never publish on any site page or data file: AWS account ID, Cloudflare tunnel ID, LAN registry address, private IPs, phone number. Exception: the resume PDF keeps the phone number (Bharath's choice). Email is allowed.
 19. Authorship: the Django app was built with AI tools. Never write "I wrote the app". Use: "I built CampusCart with AI coding tools. My own work is the platform around it: Kubernetes, CI/CD, secrets, TLS, monitoring and AWS infrastructure in Terraform."
+20. Evidence links to the audited repo stay, including files that contain a private LAN address, an AWS account ID or a tunnel ID. The repo is already public and these values give no access. Rule #18 still applies to the site: they are never written on a page or in src/data text.
