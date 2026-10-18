@@ -121,17 +121,53 @@
 
 .hero__portrait {
   width: 100%;
-  max-width: 30rem;
+  max-width: 36rem;
   height: auto;
   margin-inline: auto;
-  /* The half-body photo is cropped at its sides: feather them so no hard vertical edge shows. */
-  -webkit-mask-image: linear-gradient(to right, transparent, #000 7%, #000 93%, transparent);
-  mask-image: linear-gradient(to right, transparent, #000 7%, #000 93%, transparent);
+  /*
+   * The half-body photo is cropped at its sides and bottom. Multi-step fades (no straight band)
+   * let the shoulders dissolve and the chest fade into the page; face and collar stay solid.
+   */
+  -webkit-mask-image: linear-gradient(
+      to right,
+      transparent 0,
+      rgb(0 0 0 / 0.3) 4%,
+      rgb(0 0 0 / 0.8) 9%,
+      #000 16%,
+      #000 84%,
+      rgb(0 0 0 / 0.8) 91%,
+      rgb(0 0 0 / 0.3) 96%,
+      transparent 100%
+    ),
+    linear-gradient(to bottom, #000 70%, rgb(0 0 0 / 0.6) 88%, transparent 100%);
+  mask-image: linear-gradient(
+      to right,
+      transparent 0,
+      rgb(0 0 0 / 0.3) 4%,
+      rgb(0 0 0 / 0.8) 9%,
+      #000 16%,
+      #000 84%,
+      rgb(0 0 0 / 0.8) 91%,
+      rgb(0 0 0 / 0.3) 96%,
+      transparent 100%
+    ),
+    linear-gradient(to bottom, #000 70%, rgb(0 0 0 / 0.6) 88%, transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
 }
 
+
 @media (min-width: 1024px) {
+  .hero__portrait {
+    width: calc(100% + var(--gutter));
+    max-width: none;
+    margin-right: calc(var(--gutter) * -1);
+    margin-left: 0;
+  }
+
   .hero__inner {
     grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
     align-items: end;
   }
+
 }
