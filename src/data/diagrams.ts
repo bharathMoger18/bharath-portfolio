@@ -5,6 +5,10 @@
  * against k8s-campuscart@774df40 (nginx.conf upstream, Service ports, Jenkinsfile
  * lines 35-48 and 378-406, Jenkinsfile.aws 354-358, Terraform defaults): no
  * correction was needed. Wording fits DECISIONS #2, #4, #8, #10, #11, #15.
+ * D7 (Oct 2026): the AWS paragraphs now say "as deployed" (commit 774df40) and note
+ * the Test and Security Scan stages added later (FACTS A-35). Stage counts and
+ * the nine-stage description are unchanged, so this file no longer matches
+ * diagrams.mock.ts word for word.
  */
 import type { CaseDiagram, DiagramId } from './types.ts';
 
@@ -34,19 +38,19 @@ External Secrets Operator copies the database password from AWS Secrets Manager 
 
 Amazon ECR holds the campuscart-backend and campuscart-nginx images. Terraform remote state lives in an S3 bucket with native locking.
 
-Terraform has seven modules: ecr, eks, elasticache, iam, iam-irsa, networking and rds. The iam-irsa module is used by the production-addons root. A Jenkins pipeline (Jenkinsfile.aws, nine stages) runs plan, manual approval and apply, then builds, pushes and deploys. Jenkins reaches EKS through an access entry limited to the campuscart namespace.`;
+Terraform has seven modules: ecr, eks, elasticache, iam, iam-irsa, networking and rds. The iam-irsa module is used by the production-addons root. A Jenkins pipeline (Jenkinsfile.aws as deployed, nine stages) runs plan, manual approval and apply, then builds, pushes and deploys. I added Test and Security Scan stages after teardown; they have never run. Jenkins reaches EKS through an access entry limited to the campuscart namespace.`;
 
-export const AWS_PIPELINE_TEXT = `The AWS pipeline, from Jenkinsfile.aws, has nine stages in this order: 1 Checkout, 2 Terraform Plan, 3 Show Terraform Plan, 4 Approve Infrastructure Changes, 5 Terraform Apply, 6 Prepare AWS Context, 7 Build and Push Images, 8 Render Manifests, 9 Deploy to EKS.
+export const AWS_PIPELINE_TEXT = `The AWS pipeline, from Jenkinsfile.aws as deployed (commit 774df40), has nine stages in this order: 1 Checkout, 2 Terraform Plan, 3 Show Terraform Plan, 4 Approve Infrastructure Changes, 5 Terraform Apply, 6 Prepare AWS Context, 7 Build and Push Images, 8 Render Manifests, 9 Deploy to EKS.
 
 Stage 4 is a manual approval gate: the pipeline waits for a person, with a 30 minute timeout, before Terraform Apply. Kaniko builds the backend and nginx images and pushes them to Amazon ECR. Render Manifests reads the RDS and Redis endpoints and the ECR image URLs from terraform output. Deploy to EKS applies the manifests and then waits on rollout status: backend up to 180 seconds, nginx up to 120 seconds.
 
-This pipeline has no test stage, no security scan stage, no migrate step and no rollback.`;
+As deployed, this pipeline had no test stage, no security scan stage, no migrate step and no rollback. I added Test and Security Scan stages after teardown; they have never run.`;
 
 export const PIPELINE_COMPARE_TEXT = `Two pipelines are compared on one rail of nine slots: Source, Pipeline, Test, Scan, Build, Registry, Migrate, Deploy, Verify. A slot a pipeline does not have reads "not in this pipeline".
 
 kubeadm: Source is Checkout. Pipeline is not in this pipeline. Test and Scan are present and run only when the web image tag is new. Build and Registry are Build and Push Images, to a private registry. Migrate, Deploy and Verify are all inside the Deploy stage, which ends with a rollout check and a rollout undo on failure.
 
-AWS: Source is Checkout. Pipeline holds Terraform Plan, Show Terraform Plan, the manual approval, Terraform Apply and Prepare AWS Context. Test, Scan and Migrate are not in this pipeline. Build and Registry are Build and Push Images, to Amazon ECR. Deploy is Render Manifests and Deploy to EKS. Verify is rollout status only, with no rollback.`;
+AWS, as deployed: Source is Checkout. Pipeline holds Terraform Plan, Show Terraform Plan, the manual approval, Terraform Apply and Prepare AWS Context. Test, Scan and Migrate are not in this pipeline. Build and Registry are Build and Push Images, to Amazon ECR. Deploy is Render Manifests and Deploy to EKS. Verify is rollout status only, with no rollback. I added Test and Security Scan stages after teardown; they have never run.`;
 
 export const DIAGRAMS: Record<DiagramId, CaseDiagram> = {
   'kubeadm-architecture': { diagramId: 'kubeadm-architecture', textAlternative: KUBEADM_ARCHITECTURE_TEXT },
