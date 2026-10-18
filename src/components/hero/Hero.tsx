@@ -74,7 +74,7 @@ export default function Hero({
   const { before, emphasis, after } = copy.headline;
 
   return (
-    <section className="hero" aria-labelledby="hero-heading">
+    <section className={`hero${portrait ? ' hero--portrait' : ''}`} aria-labelledby="hero-heading">
       <GhostName text={ghostText} />
       <div className={`container hero__inner${portrait ? ' hero__inner--portrait' : ''}`}>
         <div className="hero__copy">
