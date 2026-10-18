@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import type { SiteMeta } from '../../data/types.ts';
 import { ArrowUpRightIcon, GithubIcon } from '../layout/icons.tsx';
 import GhostName from './GhostName.tsx';
-import RequestPath from './RequestPath.tsx';
 import './Hero.css';
 
 export interface HeroCopy {
@@ -14,9 +13,9 @@ export interface HeroCopy {
   sentence: string;
   primaryLabel: string;
   resumeLabel: string;
-  /** Ordered request path, outermost first. Real hops only. */
-  requestPath: string[];
-  requestPathLabel: string;
+  /** No longer rendered (the request-path strip was removed). D can delete these from data/hero.ts. */
+  requestPath?: string[];
+  requestPathLabel?: string;
 }
 
 export interface HeroProps {
@@ -116,8 +115,8 @@ export default function Hero({
           </ul>
         </div>
 
-        <div className="hero__visual">
-          {portrait ? (
+        {portrait ? (
+          <div className="hero__visual">
             <img
               className="hero__portrait"
               src={portrait.src}
@@ -126,10 +125,8 @@ export default function Hero({
               alt={`Portrait of ${site.name}`}
               decoding="async"
             />
-          ) : (
-            <RequestPath hops={copy.requestPath} label={copy.requestPathLabel} />
-          )}
-        </div>
+          </div>
+        ) : null}
       </div>
     </section>
   );
