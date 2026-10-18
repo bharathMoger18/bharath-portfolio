@@ -21,8 +21,12 @@ export interface EvidenceLink {
   path: string;
   /** Full permalink at the audited commit. */
   url: string;
-  /** Audited commit, e.g. "774df40". */
-  commit: string;
+  /**
+   * Audited commit, e.g. "774df40". Absent for evidence that is not a file in
+   * the audited repo (a screenshot committed under public/evidence/), so no
+   * "@ commit" is shown for it.
+   */
+  commit?: string;
   /** Optional line or range, e.g. "363-369". */
   lines?: string;
 }
