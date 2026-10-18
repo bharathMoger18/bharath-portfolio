@@ -1,17 +1,10 @@
 /*
- * TEMPORARY site constants for Brief A. Account D's src/data/site.ts (SiteMeta)
- * replaces this file; switching over is a one-file change.
- * TODO(D): email and LinkedIn are unknown, so they are not listed here.
+ * Layout wiring for the header and footer. Every value comes from
+ * src/data/site.ts (SITE), the single source of site-wide facts.
  */
+import { SITE } from './data/site.ts';
 import type { SiteLayoutProps } from './components/layout/SiteLayout.tsx';
 import type { NavItem } from './components/layout/types.ts';
-
-export { SITE_DESCRIPTION, SITE_TITLE, SITE_URL } from './site.constants.ts';
-
-export const OWNER = 'Bharath Moger';
-export const GITHUB_URL = 'https://github.com/bharathMoger18';
-/** Real filename as committed in public/. */
-export const RESUME_PDF = '/Bharath_Moger_DevOps_Resume.pdf';
 
 export const NAV: NavItem[] = [
   { id: 'about', label: 'About' },
@@ -23,17 +16,17 @@ export const NAV: NavItem[] = [
 
 export const layoutProps: SiteLayoutProps = {
   header: {
-    monogram: 'B',
-    ownerName: OWNER,
+    monogram: SITE.name.charAt(0),
+    ownerName: SITE.name,
     nav: NAV,
     resumeTo: '/resume',
-    githubUrl: GITHUB_URL,
+    githubUrl: SITE.githubUrl,
   },
   footer: {
-    name: OWNER,
+    name: SITE.name,
     links: [
-      { label: 'GitHub', href: GITHUB_URL, external: true },
-      { label: 'Resume (PDF)', href: RESUME_PDF, download: true },
+      { label: 'GitHub', href: SITE.githubUrl, external: true },
+      { label: 'Resume (PDF)', href: SITE.resumePath, download: true },
     ],
   },
 };

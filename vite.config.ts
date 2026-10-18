@@ -1,29 +1,25 @@
 import { defineConfig } from 'vite';
 import type { Plugin } from 'vite';
 import react from '@vitejs/plugin-react';
-import {
-  OG_IMAGE_ALT,
-  OG_IMAGE_PATH,
-  SITE_DESCRIPTION,
-  SITE_NAME,
-  SITE_TITLE,
-  SITE_URL,
-  THEME_COLOR,
-} from './src/site.constants.ts';
+// Single source of the site-wide strings. data/site.ts has a type-only import,
+// so it is safe for the config to load. Keep it free of runtime imports.
+import { OG_IMAGE_ALT, SITE } from './src/data/site.ts';
 
 const escapeAttr = (value: string) =>
   value.replaceAll('&', '&amp;').replaceAll('"', '&quot;').replaceAll('<', '&lt;');
 
-/** Fills %PLACEHOLDERS% in index.html from src/site.constants.ts (dev and build). */
+/** Fills %PLACEHOLDERS% in index.html from src/data/site.ts (dev and build). */
 function htmlConstants(): Plugin {
   const values: Record<string, string> = {
-    SITE_URL,
-    SITE_NAME,
-    SITE_TITLE,
-    SITE_DESCRIPTION,
-    OG_IMAGE_URL: `${SITE_URL}${OG_IMAGE_PATH}`,
+    SITE_URL: SITE.url,
+    SITE_NAME: SITE.name,
+    SITE_TITLE: SITE.title,
+    SITE_DESCRIPTION: SITE.description,
+    SITE_LOCALE: SITE.locale,
+    TWITTER_CARD: SITE.twitterCard,
+    OG_IMAGE_URL: `${SITE.url}${SITE.ogImage}`,
     OG_IMAGE_ALT,
-    THEME_COLOR,
+    THEME_COLOR: SITE.themeColor,
   };
   return {
     name: 'html-constants',
