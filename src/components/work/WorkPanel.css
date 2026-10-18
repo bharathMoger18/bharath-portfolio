@@ -26,7 +26,6 @@
 
 .work-panel__summary {
   max-width: 38rem;
-  margin-top: var(--space-4);
   color: var(--color-text-muted);
   font-size: var(--text-lg);
 }
@@ -63,15 +62,17 @@
   overflow-x: auto;
 }
 
+/* Wide screens: title on the left, summary, tags and link on the right. */
 @media (min-width: 64rem) {
   .work-panel {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
-    gap: var(--space-7);
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: start;
+    gap: var(--space-6) var(--space-7);
     padding: var(--space-7);
   }
 
-  /* Status label spans the top; text left, diagram right. */
-  .work-panel__side {
+  .work-panel__side,
+  .work-panel__media {
     grid-column: 1 / -1;
   }
 }
