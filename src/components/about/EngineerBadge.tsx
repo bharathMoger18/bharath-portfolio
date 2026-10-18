@@ -76,7 +76,7 @@ export default function EngineerBadge({
           </dl>
 
           <div className="badge__qr">
-            <QrCode value={site.url} label={`QR code linking to ${host}`} size={88} />
+            <QrCode value={site.url} label={`QR code linking to ${host}`} size={72} />
             <p className="badge__qr-text">
               <span className="label">Live site</span>
               <span>
