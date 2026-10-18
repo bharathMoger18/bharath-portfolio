@@ -8,7 +8,10 @@ export interface WorkPanelProps {
   project: Project;
   /** 1-based, shown as "Project 01". */
   index: number;
-  /** Optional diagram slot (Account C's component, passed in at integration). */
+  /**
+   * Optional full-width slot under the text. The diagram components follow the
+   * viewport width, not their container's, so give them the full panel width only.
+   */
   media?: ReactNode;
 }
 
@@ -22,10 +25,11 @@ export default function WorkPanel({ project, index, media }: WorkPanelProps) {
         <StatusBadge status={project.status} />
       </div>
 
-      <div className="work-panel__main">
-        <h3 id={titleId} className="work-panel__title">
-          {project.title}
-        </h3>
+      <h3 id={titleId} className="work-panel__title">
+        {project.title}
+      </h3>
+
+      <div className="work-panel__body">
         <p className="work-panel__summary">{project.summary}</p>
 
         {project.tags.length > 0 ? (

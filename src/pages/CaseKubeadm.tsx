@@ -1,21 +1,33 @@
+import { renderDiagram } from '../components/diagrams/renderDiagram.tsx';
 import Seo from '../components/layout/Seo.tsx';
-import { OWNER } from '../siteConfig.ts';
-import './pages.css';
+import CaseStudyLayout from '../components/work/CaseStudyLayout.tsx';
+import { GRAFANA_NAMESPACE_CAPTION, GRAFANA_NAMESPACE_SHOT } from '../data/evidence.ts';
+import { KUBEADM_PROJECT } from '../data/projects.ts';
+import { SITE } from '../data/site.ts';
 
-/** TODO(A, step 6): render with CaseStudyLayout. TODO(D): project data. */
+/** Size of public/evidence/grafana-namespace-pods.png, so the page reserves its space. */
+const SHOT_WIDTH = 2904;
+const SHOT_HEIGHT = 996;
+
 export default function CaseKubeadm() {
   return (
-    <article className="container page">
+    <>
       <Seo
-        title={`Self-Built Kubernetes Platform | ${OWNER}`}
-        description="Case study: a self-built Kubernetes platform. Architecture, pipeline, key decisions and evidence."
+        title={`${KUBEADM_PROJECT.title} | ${SITE.name}`}
+        description={KUBEADM_PROJECT.summary}
         path="/work/kubeadm"
       />
-      <p className="label">Case study</p>
-      <h1>
-        Self-built <em>Kubernetes</em> platform.
-      </h1>
-      <p className="page__lead">TODO(D): case study content, status line and evidence.</p>
-    </article>
+      <CaseStudyLayout
+        project={KUBEADM_PROJECT}
+        renderDiagram={renderDiagram}
+        figure={{
+          src: GRAFANA_NAMESPACE_SHOT.url,
+          alt: 'Grafana dashboard for the k8s-campuscart namespace: utilisation panels and a CPU usage graph for the nginx, postgres, redis and web pods.',
+          caption: GRAFANA_NAMESPACE_CAPTION,
+          width: SHOT_WIDTH,
+          height: SHOT_HEIGHT,
+        }}
+      />
+    </>
   );
 }

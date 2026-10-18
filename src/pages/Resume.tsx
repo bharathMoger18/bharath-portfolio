@@ -1,12 +1,14 @@
 import Seo from '../components/layout/Seo.tsx';
-import { OWNER, RESUME_PDF } from '../siteConfig.ts';
+import { SITE } from '../data/site.ts';
 import './pages.css';
+
+const RESUME_PDF = SITE.resumePath;
 
 export default function Resume() {
   return (
     <section className="container page">
       <Seo
-        title={`Resume | ${OWNER}`}
+        title={`Resume | ${SITE.name}`}
         description="Resume of Bharath Moger. Read it online or download the PDF."
         path="/resume"
       />
