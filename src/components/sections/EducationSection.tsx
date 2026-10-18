@@ -8,7 +8,7 @@ export interface EducationSectionProps {
   items: Education[];
   /** Section number shown as "07". Default 7. */
   index?: number;
-  /** Defaults to "Education & <em>experience</em>." */
+  /** Defaults to "<em>Education</em>." */
   heading?: ReactNode;
 }
 
@@ -22,7 +22,7 @@ export default function EducationSection({ items, index = 7, heading }: Educatio
       heading={
         heading ?? (
           <>
-            Education &amp; <em>experience</em>.
+            <em>Education</em>.
           </>
         )
       }
