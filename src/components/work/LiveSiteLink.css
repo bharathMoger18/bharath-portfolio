@@ -1,0 +1,18 @@
+/* Secondary (outline) pill. Same height and padding as the primary dark pill beside it. */
+.live-site-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em; /* flex items drop the space before the arrow, so the gap restores it */
+  min-height: var(--target-min);
+  padding-inline: var(--space-6);
+  border: 1px solid var(--color-dark);
+  border-radius: var(--radius-pill);
+  color: var(--color-text);
+  font-weight: var(--weight-semibold);
+  text-decoration: none;
+  transition: background-color var(--duration-fast) var(--ease-out);
+}
+
+.live-site-link:hover {
+  background: var(--color-surface-alt);
+}

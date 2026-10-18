@@ -210,7 +210,7 @@ export interface Project {
   /** One-sentence summary for WorkPanel on Home. */
   summary: string;
   status: ProjectStatus;
-  /** Only present when status.kind is "live". Never set for AWS. */
+  /** Link to the running site. Optional. Never set for AWS (docs/DECISIONS.md #2). */
   liveUrl?: string;
   tags: string[];
 

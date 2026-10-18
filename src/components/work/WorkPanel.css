@@ -39,11 +39,17 @@
   list-style: none;
 }
 
+.work-panel__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-6);
+}
+
 .work-panel__link {
   display: inline-flex;
   align-items: center;
   min-height: var(--target-min);
-  margin-top: var(--space-6);
   padding-inline: var(--space-6);
   border-radius: var(--radius-pill);
   background: var(--color-dark);
