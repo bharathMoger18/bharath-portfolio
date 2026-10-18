@@ -1,7 +1,7 @@
 .hero {
   position: relative;
   overflow: clip; /* the ghost name may be wider than the screen: never scroll sideways */
-  padding-block: var(--space-8) var(--space-9);
+  padding-block: var(--space-7) var(--space-9);
 }
 
 /* ---- Ghost name ---- */
@@ -40,7 +40,8 @@
 }
 
 .hero__headline {
-  font-size: var(--text-hero);
+  /* Scales down on short windows so the whole hero (headline, sentence, buttons, photo) fits one screen. */
+  font-size: min(var(--text-hero), max(2.75rem, 11.5vh));
   line-height: var(--leading-tight);
   max-width: 12ch;
   padding-bottom: var(--space-3); /* clears the descenders of the last line */
@@ -158,16 +159,26 @@
 
 
 @media (min-width: 1024px) {
+  .hero__headline {
+    max-width: 16ch; /* fewer, longer lines: 3 instead of 4 */
+  }
+
+  /* The photo is sized by the visible height, so face and chest are on the first screen. */
+  .hero--portrait {
+    min-height: calc(100svh - var(--header-h));
+    display: grid;
+    align-items: end;
+  }
+
   .hero__portrait {
-    width: calc(100% + var(--gutter));
+    width: auto;
     max-width: none;
-    margin-right: calc(var(--gutter) * -1);
-    margin-left: 0;
+    height: min(calc(100svh - var(--header-h) - var(--space-7)), 56rem);
+    margin: 0 calc(var(--gutter) * -1) 0 auto;
   }
 
   .hero__inner {
     grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
     align-items: end;
   }
-
 }
