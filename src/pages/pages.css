@@ -86,3 +86,10 @@
   border-radius: var(--radius-md);
   overflow-x: auto;
 }
+
+/* Phones and tablets cannot show a PDF inside a page, so the empty frame is hidden there. */
+@media (max-width: 820px), (pointer: coarse) {
+  .resume__frame {
+    display: none;
+  }
+}

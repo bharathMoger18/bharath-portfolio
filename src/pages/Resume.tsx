@@ -16,7 +16,7 @@ export default function Resume() {
       <h1>
         My <em>resume</em>.
       </h1>
-      <p className="page__lead">Read it here or download the PDF.</p>
+      <p className="page__lead">Download the PDF or open it in a new tab.</p>
 
       <div className="page__actions">
         <a className="pill pill--dark" href={RESUME_PDF} download>
