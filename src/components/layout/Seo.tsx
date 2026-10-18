@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
-import { OG_IMAGE_PATH, SITE_DESCRIPTION, SITE_URL } from '../../site.constants.ts';
+// Site-wide strings come from the same file vite.config.ts injects into index.html.
+import { SITE } from '../../data/site.ts';
 
 export interface SeoProps {
   title: string;
@@ -40,15 +41,15 @@ function setCanonical(href: string | null) {
  * social tags correct for each client-side route without duplicating tags.
  * A single static canonical would mark every route as a copy of the home page.
  */
-export default function Seo({ title, description = SITE_DESCRIPTION, path, noindex = false }: SeoProps) {
+export default function Seo({ title, description = SITE.description, path, noindex = false }: SeoProps) {
   useEffect(() => {
-    const url = `${SITE_URL}${path === '/' ? '/' : path.replace(/\/$/, '')}`;
+    const url = `${SITE.url}${path === '/' ? '/' : path.replace(/\/$/, '')}`;
     document.title = title;
     setMeta('name', 'description', description);
     setMeta('property', 'og:title', title);
     setMeta('property', 'og:description', description);
     setMeta('property', 'og:url', url);
-    setMeta('property', 'og:image', `${SITE_URL}${OG_IMAGE_PATH}`);
+    setMeta('property', 'og:image', `${SITE.url}${SITE.ogImage}`);
     setMeta('name', 'twitter:title', title);
     setMeta('name', 'twitter:description', description);
     setCanonical(noindex ? null : url);
