@@ -1,0 +1,73 @@
+/* Education and Principles. Tokens only. Mobile first, no decoration. */
+
+.timeline,
+.principles {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.timeline__item,
+.principles__item {
+  display: grid;
+  gap: var(--space-2);
+  padding-block: var(--space-6);
+  border-top: 1px solid var(--color-border);
+}
+
+.timeline__item:last-child,
+.principles__item:last-child {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.timeline__title,
+.principles__title {
+  font-size: var(--text-2xl);
+  line-height: var(--leading-snug);
+}
+
+.timeline__place,
+.timeline__grade {
+  margin-top: var(--space-2);
+  font-size: var(--text-lg);
+}
+
+.timeline__note,
+.principles__body {
+  max-width: 44rem;
+  margin-top: var(--space-3);
+  color: var(--color-text-muted);
+}
+
+.principles__body {
+  color: var(--color-text);
+}
+
+.principles__evidence {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1) var(--space-5);
+  margin: var(--space-3) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.principles__evidence a {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--target-min);
+  font-weight: var(--weight-medium);
+}
+
+@media (min-width: 64rem) {
+  .timeline__item {
+    grid-template-columns: 12rem minmax(0, 1fr);
+    gap: var(--space-6);
+  }
+
+  .principles__item {
+    grid-template-columns: 6rem minmax(0, 1fr);
+    gap: var(--space-6);
+  }
+}
