@@ -22,7 +22,7 @@ import { GRAFANA_NAMESPACE_CAPTION, GRAFANA_NAMESPACE_SHOT, ev, evTree } from '.
  * QA flips this to true ONLY after the URL below answers on launch day.
  * Until then the project reads "Deployed on my own kubeadm cluster".
  */
-export const QA_CONFIRMED_LIVE: boolean = false;
+export const QA_CONFIRMED_LIVE: boolean = true;
 export const KUBEADM_LIVE_URL = 'https://campuscart.bharathops.online';
 
 /* ------------------------------------------------------------------ */
