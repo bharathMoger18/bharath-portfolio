@@ -208,7 +208,7 @@ export const AWS_PIPELINE: Pipeline = {
     deploy: { present: true, stageIds: ['render-manifests', 'deploy-to-eks'] },
     verify: { present: true, stageIds: ['deploy-to-eks'] },
   },
-  notIncluded: ['No test stage', 'No security scan stage', 'No migrate step', 'No rollback (rollout status only)'],
+  notIncluded: ['No test or scan stage when deployed (both added after teardown, never run)', 'No migrate step', 'No rollback (rollout status only)'],
 };
 
 export const PIPELINES: Pipeline[] = [KUBEADM_PIPELINE, AWS_PIPELINE];
