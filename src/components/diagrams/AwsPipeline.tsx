@@ -16,7 +16,7 @@ export interface AwsPipelineProps {
 export default function AwsPipeline({
   textAlternative,
   pipeline = AWS_PIPELINE,
-  title = 'AWS pipeline: 9 stages',
+  title = 'AWS pipeline: 9 stages as deployed',
   caption = 'From Jenkinsfile.aws. The octagon is a manual approval gate: the pipeline waits for a person before Terraform Apply.',
 }: AwsPipelineProps) {
   return (
