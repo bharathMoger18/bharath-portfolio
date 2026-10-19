@@ -33,8 +33,8 @@ export default function PipelineCompare({
   pipelines = PIPELINES,
   railNotes = RAIL_NOTES,
   initial,
-  title = 'Two pipelines on one rail',
-  caption = 'Pick a tab. Slots that a pipeline does not have say so. The two pipelines are different.',
+  title = 'The kubeadm pipeline and the AWS pipeline as deployed, on one rail',
+  caption = 'Pick a tab. Slots that a pipeline does not have say so. The AWS tab shows the pipeline as deployed (commit 774df40).',
 }: PipelineCompareProps) {
   const uid = useId();
   const first = pipelines[0]?.id;
