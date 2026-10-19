@@ -10,6 +10,7 @@ Date: 2026-10-15
 6. kubeadm environment: label "Live" only after QA confirms the URL responds on launch day.
 7. BCA college: Shree Guru Sudhindra BCA College, Bhatkal, 2023, CGPA 8.1 (resume).
 8. Terraform has 7 modules (networking, iam, iam-irsa, eks, rds, elasticache, ecr). kubeadm pipeline has 5 stages. AWS pipeline has 9 stages and no test, scan, or rollback stage.
+   Note (2026-10-19): Jenkinsfile.aws on k8s-campuscart main now has Test and Security Scan stages, added after teardown and never run. The site still describes the AWS pipeline as deployed at commit 774df40 (nine stages, no test, scan or rollback stage).
 9. The final summary of every account goes back to the Manager through Bharath.
 10. IRSA is configured in Terraform for the External Secrets Operator and the AWS Load Balancer Controller only. App pods do not use IRSA. Never write "IRSA for the app".
 11. TLS wording: "internal TLS with cert-manager and a private CA". Never write "HTTPS on every internal hop".
