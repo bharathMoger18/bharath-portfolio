@@ -24,7 +24,7 @@ export default function AwsPipeline({
       title={title}
       caption={caption}
       textAlternative={textAlternative}
-      visualLabel={`${pipeline.title}, ${pipeline.stages.length} stages in order: ${pipeline.stages
+      visualLabel={`${pipeline.title}, ${pipeline.stages.length} stages as deployed, in order: ${pipeline.stages
         .map((s) => s.label)
         .join(', ')}. Stage ${pipeline.stages.find((s) => s.kind === 'approval')?.order ?? ''} is a manual approval gate.`}
     >
