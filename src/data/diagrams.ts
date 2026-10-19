@@ -46,7 +46,7 @@ Stage 4 is a manual approval gate: the pipeline waits for a person, with a 30 mi
 
 As deployed, this pipeline had no test stage, no security scan stage, no migrate step and no rollback. I added Test and Security Scan stages after teardown; they have never run.`;
 
-export const PIPELINE_COMPARE_TEXT = `Two pipelines are compared on one rail of nine slots: Source, Pipeline, Test, Scan, Build, Registry, Migrate, Deploy, Verify. A slot a pipeline does not have reads "not in this pipeline".
+export const PIPELINE_COMPARE_TEXT = `The kubeadm pipeline and the AWS pipeline as deployed (commit 774df40) are compared on one rail of nine slots: Source, Pipeline, Test, Scan, Build, Registry, Migrate, Deploy, Verify. A slot a pipeline does not have reads "not in this pipeline".
 
 kubeadm: Source is Checkout. Pipeline is not in this pipeline. Test and Scan are present and run only when the web image tag is new. Build and Registry are Build and Push Images, to a private registry. Migrate, Deploy and Verify are all inside the Deploy stage, which ends with a rollout check and a rollout undo on failure.
 
