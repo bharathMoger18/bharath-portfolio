@@ -143,7 +143,7 @@ export default function AwsArchitecture({
             />
             <DgNode
               name="Jenkins pipeline"
-              kind="Jenkinsfile.aws · 9 stages"
+              kind="Jenkinsfile.aws · 9 stages as deployed"
               detail="Plan, manual approval, apply, then build, push and deploy. Jenkins reaches EKS through an access entry limited to the campuscart namespace."
             />
           </DgGrid>
