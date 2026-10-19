@@ -34,7 +34,7 @@ export const NUMBERS: NumberFact[] = [
     label: 'AWS pipeline stages',
     caption:
       'Source: the nine stage names in Jenkinsfile.aws as deployed (commit 774df40). It had no test, scan or rollback stage. I added Test and Security Scan stages after teardown; they have never run.',
-    evidence: [ev('Jenkinsfile.aws: the nine stage blocks', 'Jenkinsfile.aws', '11-310')],
+    evidence: [ev('Jenkinsfile.aws: the nine stage blocks as deployed', 'Jenkinsfile.aws', '11-310')],
   },
   {
     id: 'terraform-modules',

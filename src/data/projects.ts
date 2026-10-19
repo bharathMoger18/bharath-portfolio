@@ -221,7 +221,7 @@ const awsDecisions: KeyDecision[] = [
 ];
 
 const awsEvidence: EvidenceLink[] = [
-  ev('Pipeline: the nine stages', 'Jenkinsfile.aws', '11-310'),
+  ev('Pipeline: the nine stages as deployed', 'Jenkinsfile.aws', '11-310'),
   ev('Manual approval stage', 'Jenkinsfile.aws', '102-113'),
   evTree('Terraform modules', 'terraform/modules'),
   ev('Production environment', 'terraform/environments/production/main.tf', '10-70'),
